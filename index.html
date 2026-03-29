@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XYZ Code Merger</title>
+    <link rel="stylesheet" href="./assets/style/style.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app" class="container">
+      <h2>🛠️ XYZ Code Merger</h2>
+
+      <div class="upload-area" @click="triggerFileInput">
+        <p>📁 Click here to select files</p>
+        <input
+          type="file"
+          id="fileInput"
+          multiple
+          @change="handleFileUpload"
+          style="display: none"
+        />
+      </div>
+
+      <div class="file-list" v-if="files.length > 0">
+        <file-item
+          v-for="(file, index) in files"
+          :key="index"
+          :file="file"
+          @remove="removeFile(index)"
+        >
+        </file-item>
+      </div>
+
+      <app-button :disabled="files.length === 0" @click="showModal = true">
+        🚀 CREATE (Merge {{ files.length }} files)
+      </app-button>
+
+      <app-modal
+        :show="showModal"
+        v-model="outputFileName"
+        @close="showModal = false"
+        @confirm="generateAndDownload"
+      >
+      </app-modal>
+    </div>
+
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
