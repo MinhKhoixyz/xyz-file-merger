@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>XYZ Code Merger</title>
     <link rel="stylesheet" href="./assets/style/style.css" />
+    <link rel="manifest" href="manifest.json" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body>
@@ -51,5 +52,12 @@
     </div>
 
     <script src="./assets/js/script.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("./sw.js")
+          .then(() => console.log("PWA Service Worker Registered"));
+      }
+    </script>
   </body>
 </html>
